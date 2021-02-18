@@ -1,0 +1,411 @@
+//package homework.chapter3variantb;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+class Quadratic {
+    private double a;
+    private double b;
+    private double c;
+
+    public Quadratic(double a, double b, double c) {
+        //checkQuadratic(a);
+        this.a = a;
+        this.b = b;
+        this.c = c;
+    }
+
+    public double getA() {
+        return a;
+    }
+
+    public void setA(double a) {
+        this.a = a;
+    }
+
+    public double getB() {
+        return b;
+    }
+
+    public void setB(double b) {
+        this.b = b;
+    }
+
+    public double getC() {
+        return c;
+    }
+
+    public void setC(double c) {
+        this.c = c;
+    }
+
+    public double getDiscriminant() {
+        return b * b - 4 * a * c;
+    }
+
+    public double[] getX() {
+        double d = getDiscriminant();
+        double[] x;
+
+        if (d > 0) {
+            x = new double[2];
+            x[0] = (-b + Math.sqrt(d)) / (2 * a);
+            x[1] = (-b - Math.sqrt(d)) / (2 * a);
+            return x;
+        } else if (d == 0) {
+            x = new double[1];
+            x[0] = -b / (2 * a);
+            return x;
+        } else {
+            x = new double[0];
+        }
+
+        return x;
+    }
+
+    public double getExtremum() {
+        return -b / (2 * a);
+    }
+    
+    public double[] getDecreasingInterval() {
+        double[] interval = new double[2];
+
+        if (a > 0) {
+            interval[0] = Double.NEGATIVE_INFINITY;
+            interval[1] = getExtremum();
+        } else {
+            interval[0] = getExtremum();
+            interval[1] = Double.POSITIVE_INFINITY;
+        }
+
+        return interval;
+    }
+    
+    public double[] getIncreasingInterval() {
+        double[] interval = new double[2];
+
+        if (a > 0) {
+            interval[0] = getExtremum();
+            interval[1] = Double.POSITIVE_INFINITY;
+        } else {
+            interval[0] = Double.NEGATIVE_INFINITY;
+            interval[1] = getExtremum();
+        }
+
+        return interval;
+    }
+    
+    public double getMaxRoot(double[] roots) {
+        if (roots.length == 2) {
+            double maxroot = roots[0];
+            if (roots[1] > maxroot)
+                maxroot = roots[1];
+            return maxroot;
+        }
+        else if (roots.length == 1) 
+            return roots[0];
+        else 
+            return 0;
+        
+    }
+
+}
+
+public class Main {
+    public static void main(String[] args) {
+        List<Quadratic> quadratics = new ArrayList<>();
+        quadratics.add(new Quadratic(2., 1., 5.));
+        quadratics.add(new Quadratic(1., 10.5, 3.));
+        quadratics.add(new Quadratic(2.5, 20., 3.));
+        quadratics.add(new Quadratic(1., 0, 0));
+        quadratics.add(new Quadratic(1., 0, -5.));
+        
+        //double maxx = quadratics.get(0).getMaxRoot(quadratics.get(0).getX);
+
+        for (Quadratic quadratic : quadratics) {
+            System.out.println("y = " + quadratic.getA() + "x^2 + (" + quadratic.getB() + ")x + (" + quadratic.getC() + ")");
+
+            System.out.print("Discriminant = ");
+            System.out.println(quadratic.getDiscriminant());
+
+            double[] roots = new double[2];
+            roots = quadratic.getX();
+            System.out.print("Root(s) = ");
+            System.out.println(Arrays.toString(roots));
+            double max = quadratic.getMaxRoot(roots);
+            System.out.println(max);
+
+            System.out.print("Decreasing interval = ");
+            System.out.println(Arrays.toString(quadratic.getDecreasingInterval()));
+
+            System.out.print("Increasing interval = ");
+            System.out.println(Arrays.toString(quadratic.getIncreasingInterval()));
+
+            System.out.println();
+        }
+    }
+
+        //System.out.print("Max root = ");
+        //System.out.println(getMaxX(quadratics));
+
+        //System.out.print("Min root = ");
+        //System.out.println(getMinX(quadratics));
+}
+
+
+_______________________________________________________________________________
+
+package homework.chapter3variantb;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import static java.lang.Math.*;
+import static homework.chapter3variantb.QuadraticUtils.*;
+
+class Quadratic {
+    private double a;
+    private double b;
+    private double c;
+
+    public Quadratic(double a, double b, double c) {
+        checkQuadratic(a);
+        this.a = a;
+        this.b = b;
+        this.c = c;
+    }
+
+    public double getA() {
+        return a;
+    }
+
+    public void setA(double a) {
+        this.a = a;
+    }
+
+    public double getB() {
+        return b;
+    }
+
+    public void setB(double b) {
+        this.b = b;
+    }
+
+    public double getC() {
+        return c;
+    }
+
+    public void setC(double c) {
+        this.c = c;
+    }
+
+    public double getDiscriminant() {
+        return pow(b, 2) - 4 * a * c;
+    }
+
+    public double[] getX() {
+        double d = getDiscriminant();
+        double[] x;
+
+        if (d > 0) {
+            x = new double[2];
+            x[0] = (-b + sqrt(d)) / (2 * a);
+            x[1] = (-b - sqrt(d)) / (2 * a);
+            return x;
+        } else if (d == 0) {
+            x = new double[1];
+            x[0] = -b / (2 * a);
+            return x;
+        } else {
+            x = new double[0];
+        }
+
+        return x;
+    }
+
+    public double getExtremum() {
+        return -b / (2 * a);
+    }
+
+    public double[] getDecreasingInterval() {
+        double[] interval = new double[2];
+
+        if (a > 0) {
+            interval[0] = Double.NEGATIVE_INFINITY;
+            interval[1] = getExtremum();
+        } else {
+            interval[0] = getExtremum();
+            interval[1] = Double.POSITIVE_INFINITY;
+        }
+
+        return interval;
+    }
+
+    public double[] getIncreasingInterval() {
+        double[] interval = new double[2];
+
+        if (a > 0) {
+            interval[0] = getExtremum();
+            interval[1] = Double.POSITIVE_INFINITY;
+        } else {
+            interval[0] = Double.NEGATIVE_INFINITY;
+            interval[1] = getExtremum();
+        }
+
+        return interval;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+
+        sb = sb.append(a).append("*x^2");
+        if (b != 0) {
+            if (b > 0) {
+                sb = sb.append("+");
+            }
+            sb = sb.append(Double.toString(b)).append("*x");
+        }
+        if (c != 0) {
+            if (c > 0) {
+                sb = sb.append("+");
+            }
+            sb.append(Double.toString(c));
+        }
+        sb = sb.append("=0");
+
+        return sb.toString();
+    }
+}
+
+
+class QuadraticUtils {
+    private QuadraticUtils() {
+    }
+
+    public static void checkQuadratic(double a) {
+        if (a == 0) {
+            throw new IllegalArgumentException("This isn't a quadratic equation");
+        }
+    }
+
+    public static double getMaxX(List<Quadratic> quadratics) {
+        checkNull(quadratics);
+        Quadratic[] quadraticsArray = new Quadratic[quadratics.size()];
+        quadraticsArray = quadratics.toArray(quadraticsArray);
+        return getMaxX(quadraticsArray);
+    }
+
+    public static double getMaxX(Quadratic... quadratics) {
+        checkNull(quadratics);
+        List<Double> roots = getAllX(quadratics);
+        return getMax(roots);
+    }
+
+    public static double getMinX(List<Quadratic> quadratics) {
+        checkNull(quadratics);
+        Quadratic[] quadraticsArray = new Quadratic[quadratics.size()];
+        quadraticsArray = quadratics.toArray(quadraticsArray);
+        return getMinX(quadraticsArray);
+    }
+
+    public static double getMinX(Quadratic... quadratics) {
+        checkNull(quadratics);
+        List<Double> roots = getAllX(quadratics);
+        return getMin(roots);
+    }
+
+    private static List<Double> getAllX(Quadratic... quadratics) {
+        checkNull(quadratics);
+        List<Double> xs = new ArrayList<>();
+
+        for (Quadratic quadratic : quadratics) {
+            for (double x : quadratic.getX()) {
+                xs.add(x);
+            }
+        }
+        return xs;
+    }
+
+    private static double getMax(List<Double> elems) {
+        checkNull(elems);
+        checkEmpty(elems);
+
+        double max = elems.get(0);
+
+        for (int i = 1, size = elems.size(); i < size; i++) {
+            if (elems.get(i) > max) {
+                max = elems.get(i);
+            }
+        }
+        return max;
+    }
+
+    private static double getMin(List<Double> elems) {
+        checkNull(elems);
+        checkEmpty(elems);
+
+        double min = elems.get(0);
+
+        for (int i = 1, size = elems.size(); i < size; i++) {
+            if (elems.get(i) < min) {
+                min = elems.get(i);
+            }
+        }
+        return min;
+    }
+
+    private static void checkEmpty(List<Double> xs) {
+        if (xs.isEmpty()) {
+            throw new IllegalArgumentException("No roots");
+        }
+    }
+
+    private static void checkNull(Object object){
+        if (isNull(object)) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private static boolean isNull (Object object){
+        return  (object == null);
+    }
+}
+
+
+class QuadraticRunner {
+    public static void main(String[] args) {
+        List<Quadratic> quadratics = new ArrayList<>();
+        quadratics.add(new Quadratic(2., 1., 5.));
+        quadratics.add(new Quadratic(1., 10.5, 3.));
+        quadratics.add(new Quadratic(2.5, 20., 3.));
+        quadratics.add(new Quadratic(1., 0, 0));
+        quadratics.add(new Quadratic(1., 0, -5.));
+
+        for (Quadratic quadratic : quadratics) {
+            System.out.println(quadratic);
+
+            System.out.print("Discriminant = ");
+            System.out.println(quadratic.getDiscriminant());
+
+            System.out.print("Root(s) = ");
+            System.out.println(Arrays.toString(quadratic.getX()));
+
+            System.out.print("Decreasing interval = ");
+            System.out.println(Arrays.toString(quadratic.getDecreasingInterval()));
+
+            System.out.print("Increasing interval = ");
+            System.out.println(Arrays.toString(quadratic.getIncreasingInterval()));
+
+            System.out.println();
+        }
+
+        System.out.print("Max root = ");
+        System.out.println(getMaxX(quadratics));
+
+        System.out.print("Min root = ");
+        System.out.println(getMinX(quadratics));
+    }
+}
