@@ -1,0 +1,16 @@
+class Hello
+ {
+     public void sayhello() // Конструктор
+     {
+        System.out.println("Hello User!!");
+     }
+}
+
+public class Main
+{
+	public static void main(String[] args) {
+		Hello hi = new Hello();
+        	hi.sayhello(); 
+	}
+}
+	

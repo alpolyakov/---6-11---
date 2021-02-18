@@ -1,0 +1,40 @@
+import java.util.Scanner;
+
+public class Main
+{
+    public static boolean isPrimeNum(int n) {
+        boolean prime = true;
+        for (long i = 3; i <= Math.sqrt(n); i += 2) {
+            if (n % i == 0) {
+                prime = false;
+                break;
+            }
+        }
+        return (n % 2 != 0 && prime && n > 2) || n == 2 || n == 1;
+    }
+    
+	public static void main(String[] args) {
+	    Scanner scanner = new Scanner(System.in);
+	    
+	    System.out.println("Введите размер массива");
+        int l = scanner.nextInt();
+	    int[] arr = new int[l];
+	    
+	    System.out.println ("Введите масив");
+	    for (int i=0;i<arr.length; i++)
+            arr[i]=scanner.nextInt();
+        
+        System.out.print ("Полный массив: ");
+        for (int i=0; i<arr.length;i++)
+            System.out.print (arr[i]+" ");
+	    
+	    System.out.println ("\nПростые числа: ");
+	    for (int i=0; i<arr.length;i++)
+	    {
+            if (isPrimeNum(arr[i])) 
+                System.out.print(arr[i]+" ");
+	    }
+	    //System.out.println(mul);
+	    scanner.close();
+	}
+}
