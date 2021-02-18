@@ -13,5 +13,6 @@ public class Main
 	        if (s.equals("q")) break;
 	        System.out.println(s.equals(password) + " password\n");
        }
+	scanner.close();
 	}
 }
