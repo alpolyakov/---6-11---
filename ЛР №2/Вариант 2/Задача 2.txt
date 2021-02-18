@@ -1,0 +1,67 @@
+// Найти сумму элементов матрицы, 
+// расположенных между первым и вторым положительными элементами каждой строки.
+
+import java.util.Scanner; // импорт сканера
+import java.util.Random;
+import java.util.Arrays;
+
+public class Main
+{
+    	public static void main(String[] args) {
+	    Scanner scanner = new Scanner(System.in);
+	    
+	    System.out.println("Введите размерность матрицы");
+        int n = scanner.nextInt();
+	    int[][] mat = new int[n][n];
+	    int[] srar = new int[n];
+	    
+	    System.out.println("\nИсходная Матрица");
+	    for(int i = 0; i < n; i++) 
+	    { 
+            for(int j = 0; j < n; j++) 
+            {
+                int min = -n;
+                int max = n;
+                int diff = max - min;
+                Random random = new Random();
+                mat[i][j] = random.nextInt(diff + 1) + min;
+            }
+            System.out.println(Arrays.toString(mat[i]));
+        }
+        
+	    System.out.println("\nСумма элементов");
+        for(int i = 0; i < n; i++) 
+	    { 
+            srar[i] = 0;
+            int k = 2;
+            int a = 0;
+            int b = 0;
+            int sum = 0;
+            for(int j = 0; j < n; j++) 
+            {
+                if (mat[i][j] > 0 && k == 2) 
+                {
+                    a = j;
+                    k = k - 1; 
+                }
+                else if (mat[i][j] > 0 && k == 1)
+                {
+                    b = j;
+                    k = k - 1;
+                }
+            }
+            
+            if (b - a > 1) 
+            {
+                for(int j = a + 1; j < b; j++) 
+                {
+                    sum = sum + mat[i][j];
+                }
+            }
+            
+            System.out.println(sum);
+	    }
+        
+	    scanner.close();
+	}
+}

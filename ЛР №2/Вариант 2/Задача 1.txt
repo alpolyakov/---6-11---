@@ -1,0 +1,58 @@
+// Построить матрицу, вычитая из элементов каждой строки матрицы ее среднее арифметическое.
+
+import java.util.Scanner; // импорт сканера
+import java.util.Random;
+import java.util.Arrays;
+
+public class Main
+{
+    	public static void main(String[] args) {
+	    Scanner scanner = new Scanner(System.in);
+	    
+	    System.out.println("Введите размерность матрицы");
+        int n = scanner.nextInt();
+	    
+	    float[][] mat = new float[n][n];
+	    float[] srar = new float[n];
+	    float sum = 0;
+	    
+	    System.out.println("\nИсходная Матрица");
+	    for(int i = 0; i < n; i++) 
+	    { 
+            for(int j = 0; j < n; j++) 
+            {
+                int min = -n;
+                int max = n;
+                int diff = max - min;
+                Random random = new Random();
+                mat[i][j] = random.nextInt(diff + 1) + min;
+            }
+            //System.out.println();
+            System.out.println(Arrays.toString(mat[i]));
+        }
+        
+	    System.out.println("\nСреднее арифметическое строк");
+        for(int i = 0; i < n; i++) 
+	    { 
+            for(int j = 0; j < n; j++) 
+            {
+                sum = sum + mat[i][j];  
+            }
+            srar[i] = sum/n;
+            sum = 0;
+            System.out.println(srar[i]);
+	    }
+        
+        System.out.println("\nНовая Матрица");
+        for(int i = 0; i < n; i++) 
+	    { 
+            for(int j = 0; j < n; j++) 
+            {
+                mat[i][j] = mat[i][j] - srar[i]; 
+            }
+            System.out.println(Arrays.toString(mat[i]));
+	    }
+        
+	    scanner.close();
+	}
+}

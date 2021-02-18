@@ -1,0 +1,42 @@
+//Ввести n слов с консоли. Найти слово, состоящее только из различных символов. Если таких слов несколько, найти первое из них.
+
+import java.util.Scanner; // импорт сканера
+
+public class Main
+{
+    public static boolean check(String str) {
+        String[] subStr = str.split("");
+        int len = str.length();
+        boolean bool = true;
+        for(int i = 0; i < len-1; i++) 
+        {
+            for(int j = i+1; j < len; j++)
+            {
+                if (subStr[j].equals(subStr[i]))
+                    bool = false;
+            }
+        }
+        return bool;
+    }
+    
+	public static void main(String[] args) {
+	    Scanner scanner = new Scanner(System.in);
+	    
+	    System.out.println("Введите строку");
+        String s = scanner.nextLine();
+	    
+	    String delimeter = " "; // Разделитель
+	    
+	    String[] subStr;
+	    subStr = s.split(delimeter); // Разделения строки str с помощью метода split()
+	    int[] larr = new int[subStr.length];
+	    
+	    System.out.println("Слова с разными символами");
+	    for(int i = 0; i < subStr.length; i++) 
+	    { 
+            if (check(subStr[i]))
+                System.out.println(subStr[i]);
+        }
+	    scanner.close();
+	}
+}

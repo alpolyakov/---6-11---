@@ -1,0 +1,66 @@
+// Ввести n строк с консоли, найти самую короткую и самую длинную строки. Вывести найденные строки и их длину.
+
+import java.util.Scanner; // импорт сканера
+
+public class Main
+{
+    public static int max(int[] arr) {
+        int max = arr[0];
+        int imax = 0;
+        for(int i = 0; i < arr.length; i++) 
+        {
+            if (max < arr[i])
+            {
+                imax = i;
+                max = arr[i];
+            }
+        }
+        return imax;
+    }
+    public static int min(int[] arr) {
+        int min = arr[0];
+        int imin = 0;
+        for(int i = 0; i < arr.length; i++) 
+        {
+            if (min > arr[i])
+            {
+                imin = i;
+                min = arr[i];
+            }
+        }
+        return imin;
+    }
+    
+	public static void main(String[] args) {
+	    Scanner scanner = new Scanner(System.in);
+	    
+	    System.out.println("Введите количество строк");
+        int n = scanner.nextInt();
+	    String[] subStr = new String[n+1];
+	    String[] subStrR = new String[n];
+	    
+	    System.out.println("Введите строки");
+	    for(int i = 0; i < subStr.length; i++) 
+	    {
+            subStr[i] = scanner.nextLine();
+	    }
+	    for(int i = 0; i < subStrR.length; i++) 
+	    {
+            subStrR[i] = subStr[i+1];
+	    }
+	    
+	    System.out.println ("Все строки: ");
+	    for (int i=0; i<subStrR.length;i++)
+            System.out.println ("'" + subStrR[i]+"'\n");
+	    
+	    int[] larr = new int[subStrR.length];
+	    for(int i = 0; i < subStrR.length; i++) 
+	    { 
+            larr[i] = subStrR[i].length();
+            //System.out.println(subStrR[i].length());
+        }
+        System.out.println("Самая длинная строка " + larr[max(larr)] + " символов: '" + subStrR[max(larr)] + "'");
+        System.out.println("Самая короткая строка " + larr[min(larr)] + " символов: '" + subStrR[min(larr)] + "'");
+	    scanner.close();
+	}
+}
