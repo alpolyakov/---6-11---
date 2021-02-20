@@ -96,7 +96,7 @@ class Quadratic {
         return interval;
     }
     
-    public double getMaxRoot(double[] roots) {
+    public double getMaxRoot(double[] roots) throws Exception {
         if (roots.length == 2) {
             double maxroot = roots[0];
             if (roots[1] > maxroot)
@@ -106,7 +106,21 @@ class Quadratic {
         else if (roots.length == 1) 
             return roots[0];
         else 
-            return 0;
+            throw new Exception("Корней нет");
+        
+    }
+    
+    public double getMinRoot(double[] roots) throws Exception {
+        if (roots.length == 2) {
+            double minroot = roots[0];
+            if (roots[1] < minroot)
+                minroot = roots[1];
+            return minroot;
+        }
+        else if (roots.length == 1) 
+            return roots[0];
+        else 
+            throw new Exception("Корней нет");
         
     }
 
@@ -115,6 +129,10 @@ class Quadratic {
 public class Main {
     public static void main(String[] args) {
         List<Quadratic> quadratics = new ArrayList<>();
+        List<Double> maxroots = new ArrayList<Double>();
+        List<Double> minroots = new ArrayList<Double>();
+        //double maxx = first.getMaxRoot(first.getX());
+        
         quadratics.add(new Quadratic(2., 1., 5.));
         quadratics.add(new Quadratic(1., 10.5, 3.));
         quadratics.add(new Quadratic(2.5, 20., 3.));
@@ -122,7 +140,7 @@ public class Main {
         quadratics.add(new Quadratic(1., 0, -5.));
         
         //double maxx = quadratics.get(0).getMaxRoot(quadratics.get(0).getX);
-
+        int narr = 0;
         for (Quadratic quadratic : quadratics) {
             System.out.println("y = " + quadratic.getA() + "x^2 + (" + quadratic.getB() + ")x + (" + quadratic.getC() + ")");
 
@@ -133,8 +151,20 @@ public class Main {
             roots = quadratic.getX();
             System.out.print("Root(s) = ");
             System.out.println(Arrays.toString(roots));
-            double max = quadratic.getMaxRoot(roots);
-            System.out.println(max);
+            
+            try {
+                double max = quadratic.getMaxRoot(roots);
+                double min = quadratic.getMinRoot(roots);
+                narr += 1;
+                maxroots.add(max);
+                minroots.add(min);
+                } 
+            catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+            
+            //double max = quadratic.getMaxRoot(roots);
+            //System.out.println(max);
 
             System.out.print("Decreasing interval = ");
             System.out.println(Arrays.toString(quadratic.getDecreasingInterval()));
@@ -144,6 +174,34 @@ public class Main {
 
             System.out.println();
         }
+        System.out.println(narr);
+        System.out.println(maxroots);
+        System.out.println(minroots);
+        
+        if (maxroots.isEmpty()) {
+            System.out.println("Max root = None");
+        }
+        else {
+            double mx = maxroots.get(0);
+            for (int i = 0; i<narr; i++) {
+                if (maxroots.get(i) > mx)
+                    mx = maxroots.get(i);
+            }
+            System.out.println("Max root = " + mx);
+        }
+        
+        if (minroots.isEmpty()) {
+            System.out.println("Min root = None");
+        }
+        else {
+            double mn = minroots.get(0);
+            for (int i = 0; i<narr; i++) {
+                if (minroots.get(i) < mn)
+                    mn = minroots.get(i);
+            }
+            System.out.println("Min root = " + mn);
+        }
+                
     }
 
         //System.out.print("Max root = ");
@@ -152,6 +210,8 @@ public class Main {
         //System.out.print("Min root = ");
         //System.out.println(getMinX(quadratics));
 }
+
+
 
 
 _______________________________________________________________________________
