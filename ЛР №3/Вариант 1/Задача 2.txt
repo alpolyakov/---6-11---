@@ -1,0 +1,417 @@
+//Определить класс Комплекс. Класс должен содержать несколько конструкторов. Реализовать методы для сложения, вычитания, умножения, деления, присваивания
+//комплексных чисел. Создать два вектора размерности n из комплексных координат. Передать их в метод, который выполнит их сложение.
+
+import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.Scanner;
+
+ 
+class Complex {
+    double re;
+    double im;
+
+    public Complex(double re, double im) {
+        this.re = re;
+        this.im = im;
+    }
+
+    public Complex() {
+        re = 0;
+        im = 0;
+    }
+
+    public double getRe() {
+        return re;
+    }
+
+    public void setRe(double re) {
+        this.re = re;
+    }
+
+    public double getIm() {
+        return im;
+    }
+
+    public void setIm(double im) {
+        this.im = im;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("{");
+        sb.append("re=").append(re);
+        sb.append(", im=").append(im);
+        sb.append('}');
+        return sb.toString();
+    }
+
+    public Complex add(Complex z1) {
+        Complex z = new Complex();
+        z.re = re + z1.re;
+        z.im = im + z1.im;
+        return z;
+    }
+
+    public Complex mult(Complex z1) {
+        Complex z = new Complex();
+        z.re = re*z1.re - im*z1.im;
+        z.im = re*z1.im + z1.re*im;
+        return z;
+    }
+}
+
+class ComplexList {
+    List<Complex> complexList;
+
+    public ComplexList() {
+        complexList = new ArrayList<>();
+    }
+
+    public boolean remove(int k) {
+        boolean f;
+        if (f = isPossibleToRemove(k))
+            complexList.remove(k);
+        return f;
+    }
+
+    private boolean isPossibleToRemove(int k) {
+        return (k>=0 && k<complexList.size());
+    }
+
+    public void addNumber (Complex z) {
+        complexList.add(z);
+    }
+
+    public void addRandomNComplex(int n, double max) {
+        Random rand = new Random();
+        double re;
+        double im;
+        for (int i = 0; i < n; i++) {
+            re = (rand.nextDouble()-0.5)*2*max;
+            im = (rand.nextDouble()-0.5)*2*max;
+            complexList.add(new Complex(re, im));
+        }
+    }
+
+    public void output() {
+        int i=0;
+        for (Complex z: complexList) {
+            System.out.println("Число " + ++i + ": " + z.toString());
+        }
+    }
+
+    public Complex summ() {
+        Complex res = new Complex();
+        for (Complex z: complexList) {
+            res = res.add(z);
+        }
+        return res;
+    }
+
+    public Complex mult() {
+        Complex res = new Complex();
+        int i = 0;
+        for (Complex z: complexList) {
+            if (i==0) res = z;
+            else res = res.mult(z);
+            i++;
+        }
+        return res;
+    }
+}
+ 
+public class Main {
+    public static void main(String[] args) {
+        Complex z1 = new Complex(2, -2);
+        Complex z2 = new Complex(1, 2);
+        Complex z3 = new Complex(3, -4);
+        ComplexList numbers = new ComplexList();
+        numbers.addNumber(z1);
+        numbers.addNumber(z2);
+        numbers.addNumber(z3);
+        numbers.addNumber(z2.add(z3));
+        numbers.addNumber(z2.mult(z3));
+        
+        //Вывод комплексных чисел
+        numbers.output();
+        
+        //Сумма вектора комплексных чисел
+        System.out.println(numbers.summ());
+        
+        //Умножение вектора комплексных чисел
+        System.out.println(numbers.mult());
+    }
+}
+ 
+
+ 
+
+
+
+________________________________________________________________________________
+
+//Patient: id, Фамилия, Имя, Отчество, Адрес, Телефон, Номер медицинской карты, Диагноз. Создать массив объектов. 
+//Вывести: a) список пациентов, имеющих данный диагноз; b) список пациентов, номер медицинской карты у которых находится в заданном интервале.
+
+import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.Scanner;
+
+ 
+class Complex {
+    double re;
+    double im;
+
+    public Complex(double re, double im) {
+        this.re = re;
+        this.im = im;
+    }
+
+    public Complex() {
+        re = 0;
+        im = 0;
+    }
+
+    public double getRe() {
+        return re;
+    }
+
+    public void setRe(double re) {
+        this.re = re;
+    }
+
+    public double getIm() {
+        return im;
+    }
+
+    public void setIm(double im) {
+        this.im = im;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("{");
+        sb.append("re=").append(re);
+        sb.append(", im=").append(im);
+        sb.append('}');
+        return sb.toString();
+    }
+
+    public Complex add(Complex z1) {
+        Complex z = new Complex();
+        z.re = re + z1.re;
+        z.im = im + z1.im;
+        return z;
+    }
+
+    public Complex mult(Complex z1) {
+        Complex z = new Complex();
+        z.re = re*z1.re - im*z1.im;
+        z.im = re*z1.im + z1.re*im;
+        return z;
+    }
+}
+
+class ComplexList {
+    List<Complex> complexList;
+
+    public ComplexList() {
+        complexList = new ArrayList<>();
+    }
+
+    public boolean remove(int k) {
+        boolean f;
+        if (f = isPossibleToRemove(k))
+            complexList.remove(k);
+        return f;
+    }
+
+    private boolean isPossibleToRemove(int k) {
+        return (k>=0 && k<complexList.size());
+    }
+
+    public void addNumber (Complex z) {
+        complexList.add(z);
+    }
+
+    public void addRandomNComplex(int n, double max) {
+        Random rand = new Random();
+        double re;
+        double im;
+        for (int i = 0; i < n; i++) {
+            re = (rand.nextDouble()-0.5)*2*max;
+            im = (rand.nextDouble()-0.5)*2*max;
+            complexList.add(new Complex(re, im));
+        }
+    }
+
+    public void output() {
+        int i=0;
+        for (Complex z: complexList) {
+            System.out.println("Число " + ++i + ": " + z.toString());
+        }
+    }
+
+    public Complex summ() {
+        Complex res = new Complex();
+        for (Complex z: complexList) {
+            res = res.add(z);
+        }
+        return res;
+    }
+
+    public Complex mult() {
+        Complex res = new Complex();
+        int i = 0;
+        for (Complex z: complexList) {
+            if (i==0) res = z;
+            else res = res.mult(z);
+            i++;
+        }
+        return res;
+    }
+}
+
+class ConsInterface {
+
+    // provides user's interface
+    public void run(ComplexList numbers) {
+        boolean isNeedToRun = true;
+        Scanner sc = new Scanner(System.in);
+        while (isNeedToRun) {
+            try {
+                viewText();
+                String s = sc.nextLine();
+                int choice = Integer.parseInt(s);
+                switch (choice) {
+                    case 1: {
+                        numbers.output();
+                    }
+                    break;
+                    case 2: {
+                        System.out.println("Введите количество генерируемых чисел: ");
+                        int n = inputInt(sc);
+                        System.out.println("Введите максимальное значение модуля действительной и мнимой частей: ");
+                        double max = inputDouble(sc);
+                        numbers.addRandomNComplex(n, max);
+                    }
+                    break;
+                    case 3: {
+                        System.out.println("Введите действительную часть комплексного числа: ");
+                        double re = inputDouble(sc);
+                        System.out.println("Введите мнимую часть комплексного числа: ");
+                        double im = inputDouble(sc);
+                        numbers.addNumber(new Complex(re, im));
+                    }
+                    break;
+                    case 4: {
+                        System.out.println("Введите номер удаляемого числа: ");
+                        int k = inputInt(sc);
+                        boolean isPosibleToRemove = numbers.remove(k-1);
+                        if (!isPosibleToRemove) {
+                            System.out.println("Нет элемента с таким номером!");
+                        }
+                    }
+                    break;
+                    case 5: {
+                        Complex z = numbers.summ();
+                        System.out.println("Сумма всех чисел списка = " + z.toString());
+                        }
+                    break;
+                    case 6: {
+                        Complex z = numbers.mult();
+                        System.out.println("Произведение всех чисел списка = " + z.toString());
+                    }
+                    break;
+                    case 7: {
+                        isNeedToRun = false;
+                    }
+                    break;
+                    default: {
+                        System.out.println("Неправильный ввод! Пожалуйста, повторите.");
+                    }
+                }
+            }
+            catch (NumberFormatException e) {
+                System.out.println("Ошибка формата ввода!");
+            }
+        }
+        sc.close();
+    }
+
+    // provides correct input of double
+    private double inputDouble(Scanner sc) {
+        double value = 0;
+        boolean isNotSuccess = true;
+        while (isNotSuccess) {
+            try {
+                String s = sc.nextLine();
+                value = Double.parseDouble(s);
+                isNotSuccess = false;
+            }
+            catch (NumberFormatException e) {
+                System.out.println("Ошибка формата ввода! Введите ещё раз:");
+            }
+        }
+        return value;
+    }
+
+    // provides correct input of int
+    private static int inputInt(Scanner sc) {
+        int value = 0;
+        boolean isNotSuccess = true;
+        while (isNotSuccess) {
+            try {
+                String s = sc.nextLine();
+                value = Integer.parseInt(s);
+                isNotSuccess = false;
+            }
+            catch (NumberFormatException e) {
+                System.out.println("Ошибка формата ввода! Введите ещё раз:");
+            }
+        }
+        return value;
+    }
+
+    // outputs menu
+    private static void viewText() {
+        System.out.println("Введите Ваш выбор: ");
+        System.out.println("1 - вывести список на экран");
+        System.out.println("2 - сгенерировать список N комплексных чисел");
+        System.out.println("3 - добавить в список число вручную");
+        System.out.println("4 - удалить заданное число из списка");
+        System.out.println("5 - найти сумму всех элементов списка");
+        System.out.println("6 - найти произведение всех элементов списка");
+        System.out.println("7 - выход");
+    }
+}
+ 
+public class Main {
+    public static void main(String[] args) {
+        Complex z1 = new Complex(2, -2);
+        Complex z2 = new Complex(1, 2);
+        Complex z3 = new Complex(3, -4);
+        ComplexList numbers = new ComplexList();
+        numbers.addNumber(z1);
+        numbers.addNumber(z2);
+        numbers.addNumber(z3);
+        numbers.addNumber(z2.add(z3));
+        numbers.addNumber(z2.mult(z3));
+        
+        //Вывод комплексных чисел
+        numbers.output();
+        
+        //Сумма вектора комплексных чисел
+        System.out.println(numbers.summ());
+        
+        //Умножение вектора комплексных чисел
+        System.out.println(numbers.mult());
+        //ConsInterface consIF = new ConsInterface();
+        //consIF.run(numbers);
+    }
+}
+ 
