@@ -1,0 +1,68 @@
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class Main {
+    static public void main(String[]args){
+        Cinema c = new Cinema();
+        c.printSeanses();
+    }
+}
+
+class Cinema {
+    
+    List<Info> seanses = new ArrayList<>();
+    //public Info info;
+    //public String city;
+    
+    public Cinema() {
+        seanses.add(new Info("Октябрь", "Железный человек", "25 янв 19:00"));
+        seanses.add(new Info("Октябрь", "Джокер", "25 янв 21:30"));
+        seanses.add(new Info("Октябрь", "1408", "26 янв 00:00"));
+    }
+    
+    public void printSeanses() {
+        for (Info seanse : seanses) {
+        
+            seanse.print();
+        }
+    }
+
+    public class Info {
+        public String k,f,t; 
+    
+        public Info(String k, String f, String t) {
+            this.k=k;   
+            this.f=f;
+            this.t=t;
+        }
+            
+        public String getK() {
+            return k;
+        }
+        public void setK(String k) {
+            this.k=k;
+        }
+        
+        public String getF() {
+            return f;
+        }
+        public void setF(String f) {
+            this.f=f;
+        }
+        
+        public String getT(){
+            return t;
+        }
+        public void setT(String t){
+            this.t=t;
+        }
+        
+        public void print(){
+            
+            System.out.print("Кинотеатр: "+getK()+"\nФильм: "+getF()+"\nДата и Время сеанса: "+getT()+"\n___________________\n");
+            
+        }
+    }
+}
