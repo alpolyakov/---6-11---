@@ -1,0 +1,78 @@
+interface Ships {
+    int getDisplacement(); // получить водоизмещение
+    int getMaxSpeed();     // максимальую скорость
+}
+ 
+abstract class ArmyShip implements Ships {
+    protected String name;      //Название
+    private int displacement;   //водоизмещение
+    private int maxSpeed;       //скорость
+    private int distanatMax;    //максимальная дистанция
+    private int teamCount;      //Число военных в команде
+ 
+    public ArmyShip(String name, int displacement, int maxSpeed, int distanatMax, int teamCount) {
+        this.name = name;
+        this.displacement = displacement;
+        this.maxSpeed = maxSpeed;
+        this.distanatMax = distanatMax;
+        this.teamCount = teamCount;
+    }
+ 
+    public abstract String getName();
+ 
+    @Override
+    public int getDisplacement() {
+        return displacement;
+    }
+ 
+    @Override
+    public int getMaxSpeed() {
+        return maxSpeed;
+    }
+ 
+    public int getDistanatMax() {
+        return distanatMax;
+    }
+    
+    public int getTeamCount() {
+        return teamCount;
+    }
+}
+ 
+class AeroCarrier extends ArmyShip {
+    private String typeShip = "Авианосец";
+    private int planePlaces;   //Вместимость корабля
+ 
+    public AeroCarrier(String name, int displacement, int maxSpeed, int distanatMax, int teamCount, int planePlaces) {
+        super(name, displacement, maxSpeed, distanatMax, teamCount);
+        this.planePlaces = planePlaces;
+    }
+ 
+    @Override
+    public String getName() {
+        return name;
+    }
+ 
+    @Override
+    public String toString() {
+        return "~~~~~~'" + name + "\'~~~~~~\n" +
+                "Тип корабля '" + typeShip + "\';\n" +
+                "Численность экипажа = " + getTeamCount() + ";\n" +
+                "Максимальная дальность плаванья = " + getDistanatMax() + " км.\n" +
+                "Максимальная скорость = " + getMaxSpeed() + " узлов \n" +
+                "Водоизмещение = " + getDisplacement() + " тысяч тон \n" +
+                "Количество мест для авиатехники = " + getTeamCount() + " единиц \n" +
+                "_______________________________________________________";
+    }
+}
+
+ 
+public class Main {
+    public static void main(String[] args) {
+        ArmyShip [] ships = new ArmyShip[2];
+        ships[0] = new AeroCarrier("Иван IV", 20000, 30, 10000, 120, 10);
+        ships[1] = new AeroCarrier("Иван Третий", 500, 13, 100, 40, 4);
+        for (ArmyShip tmpSh : ships)
+            System.out.println(tmpSh);
+    }
+}

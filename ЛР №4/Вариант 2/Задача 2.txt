@@ -1,0 +1,69 @@
+interface Building {
+    int getHeight();           // высота
+    int getSquareMeters();     // площадь
+}
+ 
+abstract class PublicBuilding implements Building {
+    protected String adress;      //Адрес
+    private int height;           //высота
+    private int squareMeters;     //площадь
+ 
+    public PublicBuilding(String adress, int height, int squareMeters) {
+        this.adress = adress;
+        this.height = height;
+        this.squareMeters = squareMeters;
+    }
+ 
+    public abstract String getAdress();
+ 
+    @Override
+    public int getHeight() {
+        return height;
+    }
+ 
+    @Override
+    public int getSquareMeters() {
+        return squareMeters;
+    }
+}
+ 
+class Theatre extends PublicBuilding {
+    private String type = "Театр ";
+    private String name;
+    private int halls;    //Число залов
+    private int places;   //Число мест в залах
+ 
+    public Theatre(String adress, int height, int squareMeters, String name, int halls, int places) {
+        super(adress, height, squareMeters);
+        this.name = name;
+        this.halls = halls;
+        this.places = places;
+    }
+ 
+    @Override
+    public String getAdress() {
+        return adress;
+    }
+ 
+    @Override
+    public String toString() {
+        return "~~~~~~'" + type + name + "\'~~~~~~\n" +
+                "Адрес: " + getAdress() + "\n" +
+                "Число залов: " + halls + "\n" +
+                "Количество мест: " + places + "\n" +
+                "Площадь = " + getSquareMeters() + " кв. м.\n" +
+                "Высота задния = " + getHeight() + " м \n" +
+                "_______________________________________________________";
+    }
+}
+
+ 
+public class Main {
+    public static void main(String[] args) {
+        PublicBuilding [] ships = new PublicBuilding[2];
+        ships[0] = new Theatre("Москва, ул. Кирова, 10", 40, 450, "им. Высоцкого", 1, 3000);
+        ships[1] = new Theatre("Москва, ул. Смирнова, 34а", 60, 920, "им. Савичева", 3, 10000);
+        for (PublicBuilding tmpSh : ships)
+           System.out.println(tmpSh);
+    }
+}
