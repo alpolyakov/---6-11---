@@ -1,0 +1,35 @@
+/******************************************************************************
+Выполнить задания на основе варианта 1 лабораторной работы 4, контролируя состояние потоков ввода/вывода. 
+При возникновении ошибок, связанных с корректностью выполнения математических операций, генерировать и обрабатывать исключительные ситуации. 
+Предусмотреть обработку исключений, возникающих при нехватке памяти, отсутствии требуемой записи (объекта) в файле, недопустимом значении поля и т.д.
+*******************************************************************************/
+
+import java.util.Scanner;
+
+public class Main
+{
+    public static boolean checkPassword(String sample, String checker) throws Exception {
+        if (checker.length() > 20) 
+            throw new Exception("Пароль не может быть больше 20 символов\n");
+        else if (checker.length() == 0)
+            throw new Exception("Вы не ввели значение\n");
+        else 
+            return checker.equals(sample);
+    }
+    
+	public static void main(String[] args) {
+	String password = "qwerty12345";
+       	while (true)
+       	{
+       	try {
+       	    Scanner scanner = new Scanner(System.in);
+            String s = scanner.nextLine();
+            if (s.equals("q")) break;
+            System.out.println(checkPassword(password, s) + " password\n");
+       	} catch(Exception e) {
+            System.out.println(e.getMessage());
+       	}
+		
+        }
+	}
+}
