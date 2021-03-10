@@ -1,0 +1,126 @@
+/********************
+ * В следующих заданиях требуется ввести последовательность строк из текстового потока и выполнить указанные действия.
+ * При этом могут рассматриваться два варианта:
+ * · каждая строка состоит из одного слова;
+ * · каждая строка состоит из нескольких слов.
+ * Имена входного и выходного файлов,
+ * а также абсолютный путь к ним могут быть введены как параметры командной строки или храниться в файле.
+ *
+ * 4. Найти и вывести слова текста, для которых последняя буква одного слова совпадает с первой буквой следующего слова.
+ * ********************/
+
+package var3.ex1;
+
+import java.util.*;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
+public class Main {
+    public static void main(String[] args) throws IOException{
+        Scanner scanner = new Scanner(System.in);
+        List<String> words = new ArrayList<String>();
+        Path fileName = Path.of("demo.txt");
+        String actual = Files.readString(fileName);
+        System.out.println("Содержимое файла:");
+        System.out.println(actual + "\n");
+
+        words.addAll(Arrays.asList(actual.split("\\s+")));
+
+        System.out.println("Слова, , для которых последняя буква одного слова совпадает с первой буквой следующего слова:");
+        for (int i = 0; i < words.size() - 1; i++) {
+            if (words.get(i).charAt(words.get(i).length() - 1) == words.get(i + 1).charAt(0))
+                System.out.println(words.get(i) + " -> " + words.get(i+1));
+        }
+        System.out.println(words);
+
+        scanner.close();
+    }
+}
+
+
+
+
+/******************************************************************************
+Найти и вывести слова текста, для которых последняя буква одного слова совпадает с первой буквой следующего слова.  
+*******************************************************************************/
+
+package var3.ex1;
+
+import java.util.*;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
+public class Main {
+    public static void main(String[] args) throws Exception{
+        Scanner scanner = new Scanner(System.in);
+        List<String> words = new ArrayList<String>();
+        Path fileName = Path.of("demo.txt");
+        String actual = Files.readString(fileName);
+        System.out.println(actual);
+
+        //System.out.println("Enter some strings with space separated words...");
+        //String s = null;
+        //while ( true ) {
+        //    s = scanner.nextLine();
+        //    if ( s.isEmpty() )
+        //        break;
+        words.addAll(Arrays.asList(actual.split("\\s+")));
+        //}
+
+        for (int i = 0; i < words.size() - 1; i++) {
+            if (words.get(i).charAt(words.get(i).length() - 1) == words.get(i + 1).charAt(0))
+                System.out.println(words.get(i) + " -> " + words.get(i+1));
+        }
+        System.out.println(words);
+
+        scanner.close();
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+/******************************************************************************
+Найти и вывести слова текста, для которых последняя буква одного слова совпадает с первой буквой следующего слова.  
+*******************************************************************************/
+import java.util.*;
+ 
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        List<String> words = new ArrayList<String>();
+        
+        System.out.println("Enter some strings with space separated words...");
+        String s = null;
+        while ( true ) {
+            s = scanner.nextLine();
+            if ( s.isEmpty() )
+                break;
+            words.addAll(Arrays.asList(s.split("\\s+")));
+        }
+        
+        List<String> stringsList = new ArrayList<>(words);
+//stringsList.get(0); // "string1";
+//stringsList.get(1); // "string2";
+        
+        for (int i = 0; i < stringsList.size() - 1; i++) {
+        //for ( String tail : words )
+            //for ( String head : words )
+            //if ( tail.charAt(tail.length() - 1) == head.charAt(0) )
+            if (stringsList.get(i).charAt(stringsList.get(i).length() - 1) == stringsList.get(i + 1).charAt(0))
+                System.out.println(stringsList.get(i) + " -> " + stringsList.get(i+1));
+        }
+        System.out.println(words);
+        
+        scanner.close();
+    }
+}
