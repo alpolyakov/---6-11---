@@ -1,0 +1,132 @@
+/******************************************************************************
+Выполнить задания из варианта 2 лабораторной работы 4, реализуя собственные обработчики исключений и исключения ввода/вывода.
+
+interface Здание <- abstract class Общественное Здание <- class Театр.  
+*******************************************************************************/
+
+interface Building {
+    int getHeight()  throws Exception;           // высота
+    int getSquareMeters() throws Exception;     // площадь
+}
+ 
+abstract class PublicBuilding implements Building {
+    protected String adress;      //Адрес
+    private int height;           //высота
+    private int squareMeters;     //площадь
+ 
+    public PublicBuilding(String adress, int height, int squareMeters) {
+        this.adress = adress;
+        this.height = height;
+        this.squareMeters = squareMeters;
+    }
+ 
+    public abstract String getAdress();
+ 
+    @Override
+    public int getHeight() throws Exception {
+        if (height < 3 || height > 1000) {
+            throw new Exception("<Error! Некорректная высота здания>");
+        }
+        else 
+            return height;
+    }
+ 
+    @Override
+    public int getSquareMeters()  throws Exception {
+        if (squareMeters < 10 || squareMeters > 1000000) {
+            throw new Exception("<Error! Некорректная площадь здания>");
+        }
+        else 
+            return squareMeters;
+    }
+}
+ 
+class Theatre extends PublicBuilding {
+    private String type = "Театр ";
+    private String name;
+    private int halls;    //Число залов
+    private int places;   //Число мест в залах
+ 
+    public Theatre(String adress, int height, int squareMeters, String name, int halls, int places) {
+        super(adress, height, squareMeters);
+        this.name = name;
+        this.halls = halls;
+        this.places = places;
+    }
+ 
+    @Override
+    public String getAdress() {
+        return adress;
+    }
+    
+    public int getHalls()  throws Exception {
+        if (halls < 0) {
+            throw new Exception("<Error! Число залов меньше нуля>");
+        }
+        else 
+            return halls;
+    }
+    
+    public int getPlaces()  throws Exception {
+        if (places < 0) {
+            throw new Exception("<Error! Число мест меньше нуля>");
+        }
+        else 
+            return places;
+    }
+ 
+    @Override
+    public String toString() {
+        String heightStr = "";
+        String squareMetersStr = "";
+        String hallsStr = "";
+        String placesStr = "";
+        
+        //проверка высоты здания
+        try {
+            heightStr = String.valueOf(getHeight()) + " м";
+        } catch(Exception e) {
+            heightStr = e.getMessage();
+        }
+        
+        //проверка площади здания
+        try {
+            squareMetersStr = String.valueOf(getSquareMeters()) + " кв. м.";
+        } catch(Exception e) {
+            squareMetersStr = e.getMessage();
+        }
+        
+        //проверка числа залов
+        try {
+            hallsStr = String.valueOf(getHalls());
+        } catch(Exception e) {
+            hallsStr = e.getMessage();
+        }
+        
+        //проверка числа мест
+        try {
+            placesStr = String.valueOf(getPlaces());
+        } catch(Exception e) {
+            placesStr = e.getMessage();
+        }
+        
+        return "~~~~~~'" + type + name + "\'~~~~~~\n" +
+                "Адрес: " + getAdress() + "\n" +
+                "Число залов: " + hallsStr + "\n" +
+                "Количество мест: " + placesStr + "\n" +
+                "Площадь = " + squareMetersStr + "\n" +
+                "Высота задния = " + heightStr + "\n" +
+                "_______________________________________________________";
+    }
+}
+
+ 
+public class Main {
+    public static void main(String[] args) {
+        PublicBuilding [] ships = new PublicBuilding[2];
+        ships[0] = new Theatre("Москва, ул. Кирова, 10", 40, 450, "им. Высоцкого", 1, 3000);
+        ships[1] = new Theatre("Москва, ул. Смирнова, 34а", -60, -920, "им. Савичева", -3, -10000);
+        for (PublicBuilding tmpSh : ships)
+           System.out.println(tmpSh);
+    }
+}
