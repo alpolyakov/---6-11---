@@ -1,0 +1,151 @@
+package var2.ex1;
+
+/******************************************************************************
+ Выполнить задания из варианта 2 лабораторной работы 4, реализуя собственные обработчики исключений и исключения ввода/вывода.
+
+ interface Корабль <- abstract class Военный Корабль <- class Авианосец.
+ *******************************************************************************/
+
+interface Ships {
+    int getDisplacement() throws Exception; // получить водоизмещение
+    int getMaxSpeed() throws Exception;     // максимальую скорость
+}
+
+abstract class ArmyShip implements Ships {
+    protected String name;      //Название
+    private int displacement;   //водоизмещение
+    private int maxSpeed;       //скорость
+    private int distanatMax;    //максимальная дистанция
+    private int teamCount;      //Число военных в команде
+
+    public ArmyShip(String name, int displacement, int maxSpeed, int distanatMax, int teamCount) {
+        this.name = name;
+        this.displacement = displacement;
+        this.maxSpeed = maxSpeed;
+        this.distanatMax = distanatMax;
+        this.teamCount = teamCount;
+    }
+
+    public abstract String getName();
+
+    @Override
+    public int getDisplacement() throws Exception {
+        if (displacement < 0) {
+            throw new Exception("<Error! Отрицательное водоизмещение>");
+        }
+        else
+            return displacement;
+    }
+
+    @Override
+    public int getMaxSpeed() throws Exception {
+        if (maxSpeed <= 0 || maxSpeed > 300) {
+            throw new Exception("<Error! Некорректная скорость>");
+        }
+        else
+            return maxSpeed;
+    }
+
+    public int getDistanatMax() throws Exception {
+        if (distanatMax <= 0) {
+            throw new Exception("<Error! Максимальная дистанция меньше нуля>");
+        }
+        else
+            return distanatMax;
+    }
+
+    public int getTeamCount()  throws Exception {
+        if (teamCount < 3) {
+            throw new Exception("<Error! Численность экипажа меньше 3-х человек>");
+        }
+        else
+            return teamCount;
+    }
+}
+
+class AeroCarrier extends ArmyShip {
+    private String typeShip = "Авианосец";
+    private int planePlaces;   //Вместимость корабля
+
+    public AeroCarrier(String name, int displacement, int maxSpeed, int distanatMax, int teamCount, int planePlaces) {
+        super(name, displacement, maxSpeed, distanatMax, teamCount);
+        this.planePlaces = planePlaces;
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    private int getPlanePlaces()   throws Exception {
+        if (planePlaces < 0) {
+            throw new Exception("<Error! Отрицательное число мест для авиатехники>");
+        }
+        else
+            return planePlaces;
+    }
+
+    @Override
+    public String toString() {
+        String displacementStr = "";
+        String maxSpeedStr = "";
+        String distanatMaxStr = "";
+        String teamCountStr = "";
+        String planePlacesStr = "";
+
+        //проверка водоизмещения
+        try {
+            displacementStr = String.valueOf(getDisplacement()) + " тысяч тон";
+        } catch(Exception e) {
+            displacementStr = e.getMessage();
+        }
+
+        //проверка скорости
+        try {
+            maxSpeedStr = String.valueOf(getMaxSpeed()) + " узлов";
+        } catch(Exception e) {
+            maxSpeedStr = e.getMessage();
+        }
+
+        //проверка дальности плаванья
+        try {
+            distanatMaxStr = String.valueOf(getDistanatMax()) + " км.";
+        } catch(Exception e) {
+            distanatMaxStr = e.getMessage();
+        }
+
+        //проверка численности экипажа
+        try {
+            teamCountStr = String.valueOf(getTeamCount()) + " человек";
+        } catch(Exception e) {
+            teamCountStr = e.getMessage();
+        }
+
+        //проверка числа мест для авиатехники
+        try {
+            planePlacesStr = String.valueOf(getPlanePlaces()) + " единиц";
+        } catch(Exception e) {
+            planePlacesStr = e.getMessage();
+        }
+
+        return "~~~~~~'" + name + "\'~~~~~~\n" +
+                "Тип корабля '" + typeShip + "\';\n" +
+                "Численность экипажа = " + teamCountStr + ";\n" +
+                "Максимальная дальность плаванья = " + distanatMaxStr + "\n" +
+                "Максимальная скорость = " + maxSpeedStr + "\n" +
+                "Водоизмещение = " + displacementStr + "\n" +
+                "Количество мест для авиатехники = " + planePlacesStr + "\n" +
+                "_______________________________________________________";
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        ArmyShip [] ships = new ArmyShip[2];
+        ships[0] = new AeroCarrier("Иван IV", 20000, 30, 10000, 120, 10);
+        ships[1] = new AeroCarrier("Иван Третий", -500, -13, -100, -40, -4);
+        for (ArmyShip tmpSh : ships)
+            System.out.println(tmpSh);
+    }
+}
+

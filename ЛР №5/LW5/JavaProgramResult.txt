@@ -1,0 +1,38 @@
+;1xe.4rav egakcap
+
+********************/
+* 
+.икортс йоджак ыловмис екдяроп монтарбо в лйаф йогурд в ьтасипаз и ыммаргорп-avaJ тскет ьтатичорП .2 * 
+* 
+/*************************** 
+
+;*.litu.avaj tropmi
+;*.oi.avaj tropmi
+;seliF.elif.oin.avaj tropmi
+;htaP.elif.oin.avaj tropmi
+
+{ niaM ssalc cilbup
+{ noitpecxEOI sworht )sgra ][gnirtS(niam diov citats cilbup    
+;)(>gnirtS<tsiLyarrA wen = senil >gnirtS<tsiL        
+;)(><tsiLyarrA wen = senilkcab >gnirtS<tsiL        
+
+;)"avaj.niaM\\1xe\\4rav\\crs"(fo.htaP = emaNelif htaP        
+;)"txt.tluseRmargorPavaJ"(fo.htaP = tluseRemaNelif htaP        
+;)emaNelif(gnirtSdaer.seliF = lautca gnirtS        
+
+;)))"n\\?r\\"(tilps.lautca(tsiLsa.syarrA(llAdda.senil        
+{ )++i ;)(ezis.senil < i ;0 = i tni( rof        
+;)(><tsiLyarrA wen = enilkcab >gnirtS<tsiL            
+;)i(teg.senil = enil gnirtS            
+{ )--j ; 0 => j ;1-)(htgnel.enil = j tni( rof            
+;))j(tArahc.enil(gnirtSot.retcarahC = hc gnirtS                
+;)hc(dda.enilkcab                
+}            
+;)1 - )(htgnel.)(gnirtSot.enilkcab ,1(gnirtsbus.)(gnirtSot.enilkcab = gnirtskcab gnirtS            
+;"n\" =+ gnirtskcab            
+;)gnirtskcab(dda.senilkcab            
+}        
+;)1 - )(htgnel.)(gnirtSot.senilkcab ,1(gnirtsbus.)(gnirtSot.senilkcab = gnirtSelif gnirtS        
+;))"" ," ,"(ecalper.gnirtSelif ,tluseRemaNelif(gnirtSetirw.seliF        
+}    
+}
