@@ -62,3 +62,47 @@ public class Main {
         Files.writeString(fileNameResult, fileString.replace(", ", ""));
     }
 }
+
+/********************************************************************************************************************************
+
+package var4.ex2;
+
+/********************
+ *
+ * 9. Прочитать текст Java-программы и
+ * все слова public в объявлении атрибутов и методов класса заменить на слово private.
+ *
+ ***************************
+
+import java.util.*;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        List<String> lines = new ArrayList<String>();
+        List<String> changedLines = new ArrayList<>();
+
+        Path fileName = Path.of("src\\var4\\ex2\\Main.java");
+        Path fileNameResult = Path.of("JavaProgram_4_2_Result.txt");
+        String actual = Files.readString(fileName);
+
+        lines.addAll(Arrays.asList(actual.split("\\r?\\n")));
+        for (int i = 0; i < lines.size(); i++) {
+            List<String> words = new ArrayList<String>();
+            String line = lines.get(i);
+
+            line = line.replace("public class ", "reserved class ");
+            line = line.replace("public ", "private ");
+            line = line.replace("reserved class ", "public class ");
+            line += "\n";
+
+            changedLines.add(line);
+        }
+        String fileString = changedLines.toString().substring(1, changedLines.toString().length() - 1);
+        Files.writeString(fileNameResult, fileString.replace(", ", ""));
+    }
+}
+
+*************************************************************************************************************************************************/
