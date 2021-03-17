@@ -52,9 +52,9 @@ class AutoStop {
     }
 
     public void addCar(Integer i, Car car) throws Exception {
-        if (cars.get(i) == null && i<4 && i>=0)
+        if (cars.get(i) == null && i<places && i>=0)
             cars.put(i, car);
-        else if (i>=4 || i<0)
+        else if (i>=places || i<0)
             throw new Exception("Мест не осталось!");
         else
             throw new Exception("Место " + i + " занято!");
