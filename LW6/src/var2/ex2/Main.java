@@ -1,47 +1,122 @@
 package var2.ex2;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
-public class Main {
-    class Car {
-        private String name;
-        public Car(String name) {
-            this.name = name;
-        }
+class Car {
+    private String name;
+    private int number;
 
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
+    public Car(String name, int number) {
+        this.name = name;
+        this.number = number;
     }
 
-    class AutoStop {
-        private List<Car> cars = new ArrayList<>();
-        private int places;
+    public int getNumber() {
+        return number;
+    }
 
-        public AutoStop(int places) {
-            this.places = places;
+    public void setNumber(int number) {
+        this.number = number;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+}
+
+class AutoStop {
+    private HashMap<Integer, Car> cars = new HashMap<>();
+    private int places;
+
+    public AutoStop(int places) {
+        this.places = places;
+    }
+
+    public int getPlaces() {
+        return places;
+    }
+
+    public void setPlaces(int places) {
+        this.places = places;
+    }
+
+    public HashMap<Integer, Car> getCars() {
+        return cars;
+    }
+
+    public void addCar(Integer i, Car car) throws Exception {
+        if (cars.get(i) == null && i<4 && i>=0)
+            cars.put(i, car);
+        else if (i>=4 || i<0)
+            throw new Exception("Мест не осталось!");
+        else
+            throw new Exception("Место " + i + " занято!");
+    }
+
+    public void delCar(Car car) {
+        cars.forEach((integer, car1) -> {if (car == car1) cars.remove(integer);});
+    }
+
+    public void delCarByIndex(Integer i) {
+        cars.remove(i);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Car car1 = new Car("BMV x3", 101);
+        Car car2 = new Car("Lada Vesta", 105);
+        Car car3 = new Car("Tuareg", 112);
+        Car car4 = new Car("Daewoo Matiz", 121);
+        Car car5 = new Car("Gelandewagen", 666);
+        Car car6 = new Car("Tesla Model R", 228);
+        List<Car> cars = new ArrayList<>();
+        cars.add(car5);
+        cars.add(car2);
+        cars.add(car3);
+        cars.add(car4);
+        cars.add(car1);
+        cars.add(car6);
+
+        AutoStop parkingLot = new AutoStop(4);
+        for (Car car: cars) {
+            try {
+                parkingLot.addCar(cars.indexOf(car), car);
+                System.out.println("Машина " + car.getName() + ", №" + car.getNumber() + " запарковалась на место: " + cars.indexOf(car));
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        System.out.println("\nЗанятые места на стоянке:");
+        parkingLot.getCars().forEach((integer, car) -> System.out.println(car.getName() + ", №" + car.getNumber() + ", Место:" + integer));
+        //System.out.println(parkingLot.getCars().get(12));
+
+        System.out.println("\nОсвобождение парковочного места 2");
+        parkingLot.delCarByIndex(2);
+        //parkingLot.getCars().forEach((integer, car) -> System.out.println(car.getName() + ", №" + car.getNumber() + ", Место:" + integer));
+
+        Car car10 = new Car("Toyota Corolla", 777);
+        System.out.println("\nПриезд новой машины " + car10.getName() + ", номер: " + car10.getNumber());
+
+        System.out.println("\nПоиск места для парковки:");
+        for (int j = 0; j < parkingLot.getPlaces(); j++) {
+            try {
+                parkingLot.addCar(j, car10);
+                j = parkingLot.getPlaces();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
         }
 
-        public int getPlaces() {
-            return places;
-        }
-
-        public void setPlaces(int places) {
-            this.places = places;
-        }
-
-        public void addCar(String name) throws Exception{
-            Car car = new Car(name);
-            if (cars.size() < places)
-                cars.add(car);
-            
-        }
+        System.out.println("\nЗанятые места на стоянке:");
+        parkingLot.getCars().forEach((integer, car) -> System.out.println(car.getName() + ", №" + car.getNumber() + ", Место:" + integer));
     }
 }
 
