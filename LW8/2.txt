@@ -1,0 +1,42 @@
+public class Main {
+
+    public static void main(String[] args) {
+        // [+][-][+][-]
+        new MyThread("+").start();
+        new MyThread("-").start();
+    }
+
+    public static Object key = new Object();
+    // "тяжелый"
+    public static void test(String message) {
+        try {
+            synchronized (key) {
+                System.out.print("[");
+                Thread.sleep(200);
+                System.out.print(message);
+                Thread.sleep(200);
+                System.out.print("]");
+                key.notify(); //возобновление потока
+                key.wait();   //поток в режиме ожидания
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+}
+class MyThread extends Thread {
+    private String mess;
+
+    MyThread(String m) {
+        this.mess = m;
+    }
+
+    @Override
+    public void run() {
+        while(true) {
+            Main.test(this.mess);
+        }
+    }
+}
+
